@@ -6,7 +6,7 @@
                 <format>{"Hello":"World"}</format>
                 <args/>
             </payloadFactory>
-            <log level="full" separator="****MyThirdLog****">
+            <log level="full" separator="****MyForthLog****">
                 <property expression="$trp:API_NAME" name="API_NAME"/>
                 <property expression="$trp:APPLICATION_NAME" name="APPLICATION_NAME"/>
                 <property expression="$trp:API_NAME" name="AM_KEY_TYPE"/>
