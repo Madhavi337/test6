@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/HelloWorld" name="HelloWorld" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <payloadFactory media-type="json">
+                <format>{"Hello":"World"}</format>
+                <args/>
+            </payloadFactory>
+            <log level="full" separator="**">
+                <property expression="$trp:API_NAME" name="API_NAME"/>
+                <property expression="$trp:APPLICATION_NAME" name="APPLICATION_NAME"/>
+                <property expression="$trp:API_NAME" name="AM_KEY_TYPE"/>
+                <property expression="$trp:SYNAPSE_REST_API" name="SYNAPSE_REST_API"/>
+                <property expression="$trp:REST_FULL_REQUEST_PATH" name="REST_FULL_REQUEST_PATH"/>
+                <property expression="$trp:SYNAPSE_REST_API_VERSION" name="SYNAPSE_REST_API_VERSION"/>
+                <property expression="$trp:TRANSPORT_IN_NAME" name="TRANSPORT_IN_NAME"/>
+                <property expression="$trp:REST_API_CONTEXT" name="REST_API_CONTEXT"/>
+                <property expression="$trp:API_ELECTED_RESOURCE" name="API_ELECTED_RESOURCE"/>
+                <property expression="$trp:APPLICATION_ID" name="APPLICATION_ID"/>
+                <property expression="$trp:REST_SUB_REQUEST_PATH" name="REST_SUB_REQUEST_PATH"/>
+                <property expression="$trp:API-HOSTNAME" name="API-HOSTNAME"/>
+                <property expression="$trp:PLAYER_ID" name="PLAYER_ID"/>
+                <property expression="$trp:HTTP_METHOD" name="HTTP_METHOD"/>
+                <property expression="$trp:API_PUBLISHER" name="API_PUBLISHER"/>
+                <property expression="$trp:USER_NAME" name="USER_NAME"/>
+                <property expression="$trp:USER_ID" name="USER_ID"/>
+                <property expression="$trp:CONSUMER_KEY" name="CONSUMER_KEY"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>
