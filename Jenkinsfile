@@ -54,21 +54,21 @@ try {
             echo "newCommitComments ${newCommitComments}"
         }
     }
- stage("Checkout code: configuration"){
-    echo "Enter Checkout code: configuration"
-      props = readYaml file: "${ei_service_project_tem_path}/SPLCICD/solar-system-api/jenkinsfile.pipeline.yml"
-     echo "Base_EI_Project = ${env.Base_EI_Project}"
-       Base_EI_Project = getNotNullValue(env.Base_EI_Project,props.base_ei_project)
-	 echo "Base_EI_Project = ${Base_EI_Project}"
-	      Base_EI_Project = getNotNullValue(Base_EI_Project,address);
-          Base_EI_Project = Base_EI_Project.replaceAll("https?://","")
-	 echo "Base_EI_Project = ${Base_EI_Project}"
-     def  is_vm_target_system = "${Base_EI_Project}".contains(".git"); 
-	 def is_need_build = env.BRANCH_NAME != 'main' || isRunByAdmin ;
-	 notify_users = concatNotifyUsers(props.notify_users,env.Notify_Users);
-    echo "Exit Checkout code: configuration"
- }
-  echo "Base_EI_Project = ${Base_EI_Project}"
+ //stage("Checkout code: configuration"){
+   // echo "Enter Checkout code: configuration"
+   //   props = readYaml file: "${ei_service_project_tem_path}/SPLCICD/solar-system-api/jenkinsfile.pipeline.yml"
+   //  echo "Base_EI_Project = ${env.Base_EI_Project}"
+   //    Base_EI_Project = getNotNullValue(env.Base_EI_Project,props.base_ei_project)
+	// echo "Base_EI_Project = ${Base_EI_Project}"
+	  //    Base_EI_Project = getNotNullValue(Base_EI_Project,address);
+        //  Base_EI_Project = Base_EI_Project.replaceAll("https?://","")
+	 //echo "Base_EI_Project = ${Base_EI_Project}"
+     //def  is_vm_target_system = "${Base_EI_Project}".contains(".git"); 
+	// def is_need_build = env.BRANCH_NAME != 'main' || isRunByAdmin ;
+	// notify_users = concatNotifyUsers(props.notify_users,env.Notify_Users);
+   // echo "Exit Checkout code: configuration"
+ //}
+ // echo "Base_EI_Project = ${Base_EI_Project}"
 	//  if(!is_need_build){
 	 
 	//     //  currentBuild.setDescription("Skip build :BRANCH_NAME: ${env.BRANCH_NAME} , Base_EI_Project: ${Base_EI_Project}");
@@ -106,29 +106,29 @@ try {
 //                 body: "CAR has deployed successfully"
 //              ) 
 //     }
-    stage('Replace EI Serive Parameters') {
-        dir ("${ei_service_project_tem_path}") {          
-              dir ("SPLCICD/solar-system-api"){
-                echo "Enter1"
-                bat 'dir'                
-                echo "enter2"
-                props.environments.main.each {
-                    echo "enter3"
-                updateProperty("{${it.key}}", "${it.value}" ,'*/src/main/synapse-config/*/*.xml')
+   // stage('Replace EI Serive Parameters') {
+     //   dir ("${ei_service_project_tem_path}") {          
+       //       dir ("SPLCICD/solar-system-api"){
+          //      echo "Enter1"
+            //    bat 'dir'                
+           //     echo "enter2"
+           //     props.environments.main.each {
+           //         echo "enter3"
+            //    updateProperty("{${it.key}}", "${it.value}" ,'*/src/main/synapse-config/*/*.xml')
                 // updateProperty("${it.key}", "${it.value}" ,'*/dataservice/*.dbs')
-            }
-              }
-               
+         //   }
+             // }
+         //      
             
-        }
-    }
+      //  }
+ //   }
         def build_result = ""
         def deploy_result = ""
         bat "java -version"
         stage("Build in Maven"){
             echo "Enter Build in Maven"
             echo "cd ${ei_service_project_tem_path}"
-          build_result = bat (returnStdout: true, script: "cd ${ei_service_project_tem_path}/SPLCICD/solar-system-api && mvn clean install -Dmaven.test.skip=true || echo success")
+          build_result = bat (returnStdout: true, script: "cd ${ei_service_project_tem_path}/Helloworld && mvn clean install -Dmaven.test.skip=true || echo success")
           is_car_build_error = build_result.contains("[ERROR]")
           echo "Exit Build in Maven"
         }
