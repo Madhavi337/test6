@@ -254,7 +254,7 @@ try {
          
     //         }
 //  }
-//  else{
+ else{
 echo "ENter Email"
  echo "Base_EI_Project = ${Base_EI_Project}"
     echo "notify_users = ${notify_users}"
