@@ -199,7 +199,7 @@ try {
        		}         
     // }
     
-   //if(!is_car_build_error){
+   if(!is_car_build_error){
     // stage("commit & push code to Base_EI_Project"){
     //     dir(base_ei_project_tem_path){
     //          withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'devops_svc',usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){
@@ -254,8 +254,8 @@ try {
          
     //         }
 //  }
- //else{
-//echo "ENter Email"
+//  else{
+echo "ENter Email"
  echo "Base_EI_Project = ${Base_EI_Project}"
     echo "notify_users = ${notify_users}"
     echo "${build_email_title_suffix} CAR file Deploy to EI Server Successfully "
@@ -276,13 +276,13 @@ try {
  }
 //   }
     // }
-  //} catch (err) {
-      //  currentBuild.result = 'FAILURE'
-        //def to_users = notify_users;
+  } catch (err) {
+        currentBuild.result = 'FAILURE'
+        def to_users = notify_users;
         
-       // if(!to_users){
-        //    to_users =  env.Notify_Users;
-      //  }
+        if(!to_users){
+            to_users =  env.Notify_Users;
+        }
         stage ('notify') {
             emailext to: "${to_users}",
             recipientProviders: [[$class: 'RequesterRecipientProvider'],[$class: 'DevelopersRecipientProvider']],
@@ -290,8 +290,8 @@ try {
             body: "${build_email_title_suffix} deploy failed \n\nError: ${err} \n\n${ei_service_related_info_html} \n\n if can not find the RC , please contact with SPL Integration Basis .\n\nEmail: - ",
             mimeType: 'text/html'
         }
-   // }
-//}
+    }
+}
 
 def concatNotifyUsers(userList1,userList2){
 
