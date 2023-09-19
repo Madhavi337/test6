@@ -254,8 +254,8 @@ try {
          
     //         }
 //  }
- else{
-echo "ENter Email"
+ //else{
+//echo "ENter Email"
  echo "Base_EI_Project = ${Base_EI_Project}"
     echo "notify_users = ${notify_users}"
     echo "${build_email_title_suffix} CAR file Deploy to EI Server Successfully "
@@ -276,13 +276,13 @@ echo "ENter Email"
  }
 //   }
     // }
-  } catch (err) {
-        currentBuild.result = 'FAILURE'
-        def to_users = notify_users;
+  //} catch (err) {
+      //  currentBuild.result = 'FAILURE'
+        //def to_users = notify_users;
         
-        if(!to_users){
-            to_users =  env.Notify_Users;
-        }
+       // if(!to_users){
+        //    to_users =  env.Notify_Users;
+      //  }
         stage ('notify') {
             emailext to: "${to_users}",
             recipientProviders: [[$class: 'RequesterRecipientProvider'],[$class: 'DevelopersRecipientProvider']],
@@ -290,8 +290,8 @@ echo "ENter Email"
             body: "${build_email_title_suffix} deploy failed \n\nError: ${err} \n\n${ei_service_related_info_html} \n\n if can not find the RC , please contact with SPL Integration Basis .\n\nEmail: - ",
             mimeType: 'text/html'
         }
-    }
-}
+   // }
+//}
 
 def concatNotifyUsers(userList1,userList2){
 
