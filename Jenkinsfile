@@ -149,7 +149,7 @@ try {
             echo "print base mi proj"
             echo "${ei_service_project_tem_path}"
         //  deploy_result =  
-         powershell "copy ${ei_service_project_tem_path}/SPLCICD/solar-system-api/solar-system-apiCompositeExporter/target/*.car C:/JenkinsShare"
+         powershell "copy ${ei_service_project_tem_path}/Helloworld/HelloworldCompositeExporter/target/*.car C:/JenkinsShare"
         // is_car_deploy_error = deploy_result.contains("[ERROR]")
  echo "Exit Cope car"
         }
@@ -199,7 +199,7 @@ try {
        		}         
     // }
     
-   if(!is_car_build_error){
+   //if(!is_car_build_error){
     // stage("commit & push code to Base_EI_Project"){
     //     dir(base_ei_project_tem_path){
     //          withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'devops_svc',usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){
