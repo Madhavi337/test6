@@ -29,6 +29,12 @@ pipeline {
                     def jsonResponse = new groovy.json.JsonSlurper().parseText(responseBody)
                     echo "Parsed JSON Response: ${jsonResponse}"
                     
+                    // Check the HTTP response status
+                    if (response.status == 200) {
+                        echo "API call was successful. Response body: ${responseBody}"
+                    } else {
+                        error "API call failed with status ${statusCode}."
+                    }
                     
                 
                 }
