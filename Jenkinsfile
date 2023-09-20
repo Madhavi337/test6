@@ -10,9 +10,8 @@ pipeline {
                     def response = httpRequest(
                         url: 'https://localhost:9164/management/login',
                         httpMode: 'GET', // Use GET, POST, or other HTTP methods as needed
-                        customHeaders:[[name:"Content-type",value:"application/x-wwww-form-urlencoded"]],
+                        customHeaders:[[name:"Content-type",value:"application/x-wwww-form-urlencoded"],[name:"Authorization",value:"Basic YWRtaW46YWRtaW4="]],
                         acceptType: 'APPLICATION_JSON',
-                        Authorization: 'Basic YWRtaW46YWRtaW4=',
                         responseHandle: 'NONE', // Use 'NONE' to capture the raw response
                         timeout: 60, // Set the timeout in seconds
                         ignoreSslErrors: true,// Set to true if the endpoint uses self-signed SSL certificates
