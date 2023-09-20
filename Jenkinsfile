@@ -14,6 +14,7 @@ pipeline {
                         acceptType: 'APPLICATION_JSON',
                         responseHandle: 'NONE', // Use 'NONE' to capture the raw response
                         timeout: 60, // Set the timeout in seconds
+                        validResponseCodes: '200', // Define the expected response code(s)
                         ignoreSslErrors: true,// Set to true if the endpoint uses self-signed SSL certificates
                     )
 
@@ -31,7 +32,8 @@ pipeline {
                     
                     // Check the HTTP response status
                     if (response.status == 200) {
-                        echo "API call was successful. Response body: ${responseBody}"
+                        echo "API call was successful. AccessToken: ${responseBody}"
+
                     } else {
                         error "API call failed with status ${statusCode}."
                     }
