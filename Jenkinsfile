@@ -29,3 +29,7 @@ pipeline {
                     echo "Parsed JSON Response: ${jsonResponse}"
                 }
             }
+        }
+    }
+
+}
