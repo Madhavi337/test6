@@ -12,6 +12,7 @@ pipeline {
                         httpMode: 'GET', // Use GET, POST, or other HTTP methods as needed
                         contentType: 'APPLICATION_JSON',
                         acceptType: 'APPLICATION_JSON',
+                        Authorization: 'Basic YWRtaW46YWRtaW4=',
                         responseHandle: 'NONE', // Use 'NONE' to capture the raw response
                         timeout: 60, // Set the timeout in seconds
                         ignoreSslErrors: true,// Set to true if the endpoint uses self-signed SSL certificates
