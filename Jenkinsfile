@@ -4,6 +4,13 @@ pipeline {
         stage('Call Endpoint') {
             steps {
                 script {
+
+                    def accessToken = 'eyJraWQiOiJiZTg2YTE3YS0zZDVkLTRiYTMtOTIxNy02MDdhZGM4NzdhNjgiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInNjb3BlIjoiZGVmYXVsdCIsImlzcyI6Imh0dHBzOlwvXC8wOjA6MDowOjA6MDowOjE6OTE2NFwvIiwiZXhwIjoxNjk1MTk0MDMzfQ.mL0obV-9xSDjtEfujAeLPMlRvsbp2iZ2PT3YE45izTgEGtJxdJ6Ebj7nJU5P6zZMncZf5lWtNhrGbjMWC8Le_3k4Ey5WkrwN_BwUst7nXZ3lrrgldvb6pWQ3sUWbS6reoYPj6o9quA9z5WCNGUMUgwhLEfSdskezDS_ISAqoY_Kh882vgRDqaZChAu96vQfGuOjAFsmQCpVY_Og2b5tvNIuw3XMBbWQQfKiLgI-E9l9J95kDDlOsTbbpFZjOtig6XP3IDz28LomZgIzz-1Ky1syebjBrbmczx5VRahNwrsmvnWJ0K9HGw2azGZzT5FeNK6KH9_Ew1VRwzzqlTvGV9g' // Replace with your actual Bearer token
+                    // Define HTTP headers, including the Authorization header with the Bearer token
+
+                    def headers = [
+                        Authorization: 'Bearer ' + accessToken
+                    ]
                     def response = httpRequest(
                         url: 'https://localhost:9164/management/applications',
                         httpMode: 'GET', // Use GET, POST, or other HTTP methods as needed
@@ -26,6 +33,14 @@ pipeline {
                     // For example, parsing JSON:
                     def jsonResponse = new groovy.json.JsonSlurper().parseText(responseBody)
                     echo "Parsed JSON Response: ${jsonResponse}"
+                    
+                    
+                    // Check the HTTP response status
+                    if (response.status == 200) {
+                        echo "API call was successful. Response body: ${responseBody}"
+                    } else {
+                        error "API call failed with status ${statusCode}."
+                    }
                 }
             }
         }
