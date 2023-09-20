@@ -9,11 +9,11 @@ pipeline {
                         httpMode: 'GET', // Use GET, POST, or other HTTP methods as needed
                         contentType: 'APPLICATION_JSON',
                         acceptType: 'APPLICATION_JSON',
-                        Authorization: 'Bearer eyJraWQiOiIzNjI3Zjc2MC1hOWQ5LTRmMDEtOTBiMS01NDU1NjE5MjczNDkiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInNjb3BlIjoiZGVmYXVsdCIsImlzcyI6Imh0dHBzOlwvXC8wOjA6MDowOjA6MDowOjE6OTE2NFwvIiwiZXhwIjoxNjk1MTgyMTQyfQ.r4nKG9nFTmOOwKghbyYGsFRvNx561RzOlwgc5DXAToppcz5VYNM64wbqvno8m3OmftEuphnRm06mGMkKRQZJTPp6H9RrGkGKuaaHB09_T3l6VVRZJsNK7CAtT6LmegLZVxIlR99Fad_lcqpI1ZB2Ev4aFwn5HuE1I_qEwBeUKxpQfLhCu91snpG_j8mjqBw3dtoHKAMGboFpd7L2dB4le0TewdZl5lP5tsLcj1BqNs4oV7hQOnfqnITAYBJpZT3_HH9gsKHLBZ9u_iAgSnVfct2Q5cRHfv9r1fbULhsTZ8A3cZoUqZ1JMcVRYXf_tmotUbXXawO4Oxd74r5S8wboRg',
                         responseHandle: 'NONE', // Use 'NONE' to capture the raw response
                         timeout: 60, // Set the timeout in seconds
                         validResponseCodes: '200', // Define the expected response code(s)
                         ignoreSslErrors: true// Set to true if the endpoint uses self-signed SSL certificates
+                        customHeaders: [[name: 'Authorization', value: 'Bearer eyJraWQiOiIxY2ViNzdiMC1hMTU0LTRmNTktYTVjNS05ZjZhNzJmMGFkN2QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvMDowOjA6MDowOjA6MDoxOjkxNjRcLyIsInN1YiI6ImFkbWluIiwiZXhwIjoxNjk1MTI0NjI2LCJzY29wZSI6ImFkbWluIn0.idmZx5D24Ng3FtQaiXI608K1043abo_xFQLsyE0w3njz2OGbn78ncx59_zxnmpDU2xwyBMCKGWDsZf3-GB5kmJhCgjGdkJncivm18ZCAUhXguLE0JFOz8tfHh-LGR9UGIDLZ3vp-my0wZzLUAS_lQUJEcO0jSJ5c5-7-rH5TqZR9h1Zlw5qFnZCFpR9Yk0E_xA4NpUjcigabuNt4wbwyfevOpWTMaDlR6SowJ3f2A9x6sQt9HLW2E0BYIHfrTySZdCL8UkjVh-8svCH9ppE8OvjrV8wTRcNB2Llz5TCAlyWY9C-uX-qNbI3ALDUhHBcF7dMubmjXoWmRqrluJqEGxg']]
                     )
 
                     // Capture the response status code and content
