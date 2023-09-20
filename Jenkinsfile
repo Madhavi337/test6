@@ -10,7 +10,7 @@ pipeline {
                     def response = httpRequest(
                         url: 'https://localhost:9164/management/login',
                         httpMode: 'GET', // Use GET, POST, or other HTTP methods as needed
-                        contentType: 'APPLICATION_JSON',
+                        customHeaders:[[name:"Content-type",value:"application/x-wwww-form-urlencoded"]],
                         acceptType: 'APPLICATION_JSON',
                         Authorization: 'Basic YWRtaW46YWRtaW4=',
                         responseHandle: 'NONE', // Use 'NONE' to capture the raw response
