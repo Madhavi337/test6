@@ -76,13 +76,12 @@ pipeline {
                         } else {
                             error "API call to the second endpoint failed with status: ${statusCodeofSecondEP}."
                         }
-                    } else {
-                        error "API call to the first endpoint failed with status: ${statusCode}."
-                    }
                     
                 
                 }
             }
+        }
+    
         }
     }
 }
