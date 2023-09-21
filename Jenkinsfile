@@ -2,8 +2,8 @@ pipeline {
     agent any
     stages {
         stage('Call Endpoint') {
+            steps {
                 script {
-
                     
                     
                     def response = httpRequest(
@@ -46,7 +46,9 @@ pipeline {
                     }
                 }
             }
-        stage('Call SecondEndpoint') {
+    
+        stage('Call Endpoint') {
+            steps {
                 script {
                     //calling second Endpoint
                     echo "inputdata: ${inputdata}"
@@ -81,4 +83,5 @@ pipeline {
         }
     
         }
-
+    }
+}
