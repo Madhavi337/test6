@@ -66,9 +66,6 @@ pipeline {
                     echo "Response Status Code Second EP: ${statusCodeofSecondEP}"
                     echo "Response Body of Second EP: ${responseBodyofSecondEP}"
                     
-                    else {
-                            error "API call to the second endpoint failed with status: ${statusCodeofSecondEP}"
-                        }
                     }
                     else {
                         error "API call failed with status.Response Status Code: ${statusCode}"
