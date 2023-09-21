@@ -29,7 +29,7 @@ pipeline {
                     // For example, parsing JSON:
                     def jsonResponse = new groovy.json.JsonSlurper().parseText(responseBody)
                     echo "Parsed JSON Response: ${jsonResponse}"
-                    echo "Parsed JSON Token: ${jsonResponse.AccessToken}"
+                    echo "Parsed JSON Token: ${jsonResponse[0].AccessToken}"
                     // Check the HTTP response status
                     if (response.status == 200) {
                         echo "API call was successful. ResponseBody: ${responseBody}"
