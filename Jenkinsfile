@@ -39,7 +39,21 @@ pipeline {
                     if (response.status == 200) {
                         echo "API call was successful. ResponseBody: ${responseBody}"
                        
+                       
+                   // Parse the JSON to extract the access token
+                    def accessTokenValue = jsonResponse.AccessToken
+                    echo " AccessToken:   ${accessTokenValue} "
 
+                    def res = httpRequest(
+                        url: 'https://localhost:9164/management/applications',
+                        httpMode: 'GET', // Use GET, POST, or other HTTP methods as needed
+                        customHeaders:[[name:"Authorization",value:"'Bearer ' + accessTokenValue"]],
+                        acceptType: 'APPLICATION_JSON',
+                        responseHandle: 'NONE', // Use 'NONE' to capture the raw response
+                        timeout: 60, // Set the timeout in seconds
+                        validResponseCodes: '200', // Define the expected response code(s)
+                        ignoreSslErrors: true,// Set to true if the endpoint uses self-signed SSL certificates
+                    )
                     // Now, you can use 'accessToken' in subsequent steps
                         echo "Access token Successfull"
                     
