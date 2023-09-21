@@ -1,10 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Call Endpoint') {
+        stage('Call First Endpoint') { // Give it a unique name
             steps {
-                script {
-                    
+                script {                    
                     
                     def response = httpRequest(
                         url: 'https://localhost:9164/management/login',
@@ -47,7 +46,7 @@ pipeline {
                 }
             }
     
-        stage('Call Endpoint') {
+        stage('Call Second Endpoint') { // Give it a unique name
             steps {
                 script {
                     //calling second Endpoint
