@@ -35,7 +35,17 @@ pipeline {
                         echo "API call was successful. ResponseBody: ${responseBody}"
                        
 
-        
+        // Your JSON response
+                    
+                    // Parse the JSON to extract the access token
+                    def accessToken = readJSON text: jsonResponse
+
+                    // Access the value of AccessToken
+                    def accessTokenValue = accessToken.AccessToken
+
+                    echo "Access Token: ${accessTokenValue}"
+
+                    // Now, you can use 'accessTokenValue' in subsequent steps
 
                     } else {
                         error "API call failed with status.Response Status Code: ${statusCode}."
