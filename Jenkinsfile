@@ -35,12 +35,7 @@ pipeline {
                         echo "API call was successful. ResponseBody: ${responseBody}"
                        
 
-                       //
-                    def accessTokenValue = response.AccessToken()
-                    // Access the value of AccessToken
-                    
-
-                    echo "AToken: ${accessTokenValue}"
+        
 
                     } else {
                         error "API call failed with status.Response Status Code: ${statusCode}."
