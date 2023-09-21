@@ -30,6 +30,14 @@ pipeline {
                     def jsonResponse = new groovy.json.JsonSlurper().parseText(responseBody)
                     echo "Parsed JSON Response: ${jsonResponse}"
                     echo "Parsed JSON Token"
+
+                    // Parse the JSON to extract the access token
+                    def accessToken = sh(script: "echo '${json}' | jq -r '.AccessToken'", returnStdout: true).trim()
+
+                    echo "Access Token: ${accessToken}"
+
+
+
                     // Check the HTTP response status
                     if (response.status == 200) {
                         echo "API call was successful. ResponseBody: ${responseBody}"
