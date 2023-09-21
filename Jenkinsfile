@@ -33,9 +33,12 @@ pipeline {
                     // Check the HTTP response status
                     if (response.status == 200) {
                         echo "API call was successful. ResponseBody: ${responseBody}"
-                       
+                       // Parse the JSON to extract the access token
+                    def accessToken = readJSON text: jsonResponse
+                     echo "accesstoken: ${accessToken}"
+                    def accessTokenValue = accessToken.AccessToken
 
-                            ACCESS_TOKEN=${ResponseBody.AccessToken}
+                    echo "Access Token: ${accessTokenValue}"
 
                         echo "Access token Successfull"
                     
