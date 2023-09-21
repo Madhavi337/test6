@@ -37,6 +37,7 @@ pipeline {
 
                             ACCESS_TOKEN=${ResponseBody.AccessToken}
 
+                        echo "Access token Successfull"
                     
                     } else {
                         error "API call failed with status.Response Status Code: ${statusCode}."
