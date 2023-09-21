@@ -39,11 +39,12 @@ pipeline {
                     
                     // Parse the JSON to extract the access token
                     def accessToken = readJSON text: jsonResponse
+                    echo "Access Token: ${accessTokenValue}"
 
                     // Access the value of AccessToken
-                    def accessTokenValue = accessToken.AccessToken
+                    def accessTokenValue = accessToken.Access Token
 
-                    echo "Access Token: ${accessTokenValue}"
+                    echo "AccessToken: ${accessTokenValue}"
 
                     // Now, you can use 'accessTokenValue' in subsequent steps
 
