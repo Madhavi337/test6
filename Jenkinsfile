@@ -52,15 +52,21 @@ pipeline {
                         ignoreSslErrors: true,// Set to true if the endpoint uses self-signed SSL certificates
                     )
                     echo "Successfully called SecondEP"
+                    
 
                     // Capture the response status code and content
                     def statusCodeofSecondEP = responseofSecondEP.getStatus()
                     def  responseBodyofSecondEP = responseofSecondEP.getContent()
 
+                    // Check the HTTP response status
+                    if (statusCodeofSecondEP == 200) {
+                        echo "API call was successful. ResponseBody: ${responseBodyofSecondEP}"
+                    }
+
                     echo "Response Status Code Second EP: ${statusCodeofSecondEP}"
                     echo "Response Body of Second EP: ${responseBodyofSecondEP}"
                     
-                    if (statusCodeofSecondEP != 200) {
+                    else {
                             error "API call to the second endpoint failed with status: ${statusCodeofSecondEP}"
                         }
                     }
