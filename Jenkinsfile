@@ -40,11 +40,11 @@ pipeline {
                    // }
                     
 
-                  //  def accessToken = readJSON text: jsonResp
+                    def accessToken = readJSON text: jsonResponse
 
-                  //  def accessTokenValue = accessToken.AccessToken
+                    def accessTokenValue = accessToken.AccessToken
 
-                   // echo "Access Token: ${accessTokenValue}"
+                    echo "Access Token: ${accessTokenValue}"
 
                     // Parse the JSON to extract the access token
                     //def accessToken = sh(script: "echo '${json}' | jq -r '.AccessToken'", returnStdout: true).trim()
