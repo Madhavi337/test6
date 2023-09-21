@@ -35,7 +35,7 @@ pipeline {
                         echo "API call was successful. ResponseBody: ${responseBody}"
                        
 
-                            ACCESS_TOKEN=${jsonResponse.AccessToken}
+                            ACCESS_TOKEN=${ResponseBody.AccessToken}
 
                     
                     } else {
