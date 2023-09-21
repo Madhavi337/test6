@@ -54,6 +54,15 @@ pipeline {
                         validResponseCodes: '200', // Define the expected response code(s)
                         ignoreSslErrors: true,// Set to true if the endpoint uses self-signed SSL certificates
                     )
+
+                    // Capture the response status code and content
+                    def statusCode = response.getStatus()
+                    def responseBody = response.getContent()
+
+                    echo "Response Status Code: ${statusCode}"
+                    echo "Response Body of Send EP: ${responseBody}"
+
+
                     // Now, you can use 'accessToken' in subsequent steps
                         echo "Access token Successfull"
                     
