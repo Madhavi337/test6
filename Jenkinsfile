@@ -47,7 +47,7 @@ pipeline {
                     def res = httpRequest(
                         url: 'https://localhost:9164/management/applications',
                         httpMode: 'GET', // Use GET, POST, or other HTTP methods as needed
-                        customHeaders:[[name:"Authorization",value:"'Bearer ' + AccessToken"]],
+                        customHeaders:[[name:"Authorization",value:"'Bearer '+ AccessToken"]],
                         acceptType: 'APPLICATION_JSON',
                         responseHandle: 'NONE', // Use 'NONE' to capture the raw response
                         timeout: 60, // Set the timeout in seconds
