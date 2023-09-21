@@ -32,7 +32,14 @@ pipeline {
                     
                     // Check the HTTP response status
                     if (response.status == 200) {
-                        echo "API call was successful. AccessToken: ${responseBody}"
+                        echo "API call was successful. ResponseBody: ${responseBody}"
+                       
+                    // Extract and store response parameters in environment variables
+                        def parameter1 = parsedResponse.parameter1
+                        def parameter2 = parsedResponse.parameter2
+
+                        echo "Parameter 1: ${parameter1}"
+                        echo "Parameter 2: ${parameter2}"
 
                     } else {
                         error "API call failed with status ${statusCode}."
