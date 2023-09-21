@@ -56,11 +56,11 @@ pipeline {
                     )
 
                     // Capture the response status code and content
-                   // def Second Endpoint statusCode = response.getStatus()
-                   // def Second Endpoint responseBody = response.getContent()
+                    def Second Endpoint statusCode = response.getStatus()
+                    def Second Endpoint responseBody = response.getContent()
 
-                   // echo "Response Status Code Second EP: ${statusCode}"
-                   // echo "Response Body of Second EP: ${responseBody}"
+                    echo "Response Status Code Second EP: ${Second Endpoint responseBody}"
+                    echo "Response Body of Second EP: ${Second Endpoint responseBody}"
                     
                     } else {
                         error "API call failed with status.Response Status Code: ${statusCode}."
