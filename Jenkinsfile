@@ -56,8 +56,8 @@ pipeline {
                     )
 
                     // Capture the response status code and content
-                    def statusCode = response.getStatus()
-                    def responseBody = response.getContent()
+                    def Second Endpoint statusCode = response.getStatus()
+                    def Second Endpoint responseBody = response.getContent()
 
                     echo "Response Status Code Second EP: ${statusCode}"
                     echo "Response Body of Second EP: ${responseBody}"
