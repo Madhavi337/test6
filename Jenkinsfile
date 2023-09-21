@@ -39,7 +39,9 @@ pipeline {
                     def accessTokenValue = jsonResponse.AccessToken
                     echo " AccessToken:   ${accessTokenValue} "
                     echo "Bearer ${accessTokenValue}"
-                    def res = httpRequest(
+
+                    //calling second Endpoint
+                    def responseofSecondEP = httpRequest(
                         url: 'https://localhost:9164/management/applications',
                         httpMode: 'GET', // Use GET, POST, or other HTTP methods as needed
                         customHeaders:[[name:"Authorization",value:"Bearer ${accessTokenValue}"]],
@@ -49,16 +51,16 @@ pipeline {
                         validResponseCodes: '200', // Define the expected response code(s)
                         ignoreSslErrors: true,// Set to true if the endpoint uses self-signed SSL certificates
                     )
-                    echo "SecondEP"
+                    echo "Successfully called SecondEP"
 
                     // Capture the response status code and content
-                    def statusCodeofSecondEP = res.getStatus()
-                    def  responseBodyofSecondEP = res.getContent()
+                    def statusCodeofSecondEP = responseofSecondEP.getStatus()
+                    def  responseBodyofSecondEP = responseofSecondEP.getContent()
 
                     echo "Response Status Code Second EP: ${statusCodeofSecondEP}"
                     echo "Response Body of Second EP: ${responseBodyofSecondEP}"
                     
-                    if (statusCode2 != 200) {
+                    if (statusCodeofSecondEP != 200) {
                             error "API call to the second endpoint failed with status: ${statusCodeofSecondEP}"
                         }
                     }
