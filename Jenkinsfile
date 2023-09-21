@@ -32,8 +32,8 @@ pipeline {
                     echo "Parsed JSON Token"
 
                     // Parse the JSON to extract the access token
-                    def accessTokenValue = jsonResponse.AccessToken
-                    echo " AccessToken:   ${accessTokenValue} "
+                    //def accessTokenValue = jsonResponse.AccessToken
+                    //echo " AccessToken:   ${accessTokenValue} "
 
                     // Check the HTTP response status
                     if (response.status == 200) {
