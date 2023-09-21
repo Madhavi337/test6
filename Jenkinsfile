@@ -52,10 +52,10 @@ pipeline {
                     )
 
                     // Capture the response status code and content
-                    def 2statusCode = response2.getStatus()
+                    //def 2statusCode = response2.getStatus()
                     def  2responseBody = response2.getContent()
 
-                    echo "Response Status Code Second EP: ${2statusCode}"
+                    //echo "Response Status Code Second EP: ${2statusCode}"
                     echo "Response Body of Second EP: ${2responseBody}"
                     
                     } else {
