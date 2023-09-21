@@ -31,11 +31,17 @@ pipeline {
                     echo "Parsed JSON Response: ${jsonResponse}"
                     echo "Parsed JSON Token"
 
+    
+                }
+            }
+        }
+        stage('Call another Endpoint') {
+            steps {
+                script {  
                     // Check the HTTP response status
                     if (response.status == 200) {
                         echo "API call was successful. ResponseBody: ${responseBody}"
-                       
-                       
+                    
                    // Parse the JSON to extract the access token
                     def accessTokenValue = jsonResponse.AccessToken
                     echo " AccessToken:   ${accessTokenValue} "
@@ -58,7 +64,11 @@ pipeline {
                     echo "Response Status Code Second EP: ${statusCodeofSecondEP}"
                     echo "Response Body of Second EP: ${responseBodyofSecondEP}"
                     
-                    } else {
+                    if (statusCode2 != 200) {
+                            error "API call to the second endpoint failed with status: ${statusCodeofSecondEP}."
+                        }
+                    }
+                    else {
                         error "API call failed with status.Response Status Code: ${statusCodeofSecondEP}."
                     }
                     
@@ -66,6 +76,5 @@ pipeline {
                 }
             }
         }
-    }
+    
 
-}
