@@ -19,8 +19,8 @@ pipeline {
                     )
 
                     // Capture the response status code and content
-                    def statusCode = response1.getStatus()
-                    def responseBody = response1.getContent()
+                    def statusCode = response.getStatus()
+                    def responseBody = response.getContent()
 
                     echo "Response Status Code: ${statusCode}"
                     echo "Response Body: ${responseBody}"
