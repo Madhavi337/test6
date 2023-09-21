@@ -40,10 +40,10 @@ pipeline {
                   //  }
                     
 
-                    ///def accessToken = jsonResponse.AccessToken
+                    def accessTokenValue = ${jsonResponse.AccessToken}
                     echo " AccessToken:   ${jsonResponse.AccessToken} "
 
-                    def accessTokenValue = accessToken.AccessToken
+                    //def accessTokenValue = accessToken.AccessToken
 
                     echo "Access Token: ${accessTokenValue}"
 
