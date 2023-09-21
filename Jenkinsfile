@@ -19,8 +19,8 @@ pipeline {
                     )
 
                     // Capture the response status code and content
-                    def statusCode = response.getStatus()
-                    def responseBody = response.getContent()
+                    def statusCode = response1.getStatus()
+                    def responseBody = response1.getContent()
 
                     echo "Response Status Code: ${statusCode}"
                     echo "Response Body: ${responseBody}"
@@ -30,10 +30,6 @@ pipeline {
                     def jsonResponse = new groovy.json.JsonSlurper().parseText(responseBody)
                     echo "Parsed JSON Response: ${jsonResponse}"
                     echo "Parsed JSON Token"
-
-                    // Parse the JSON to extract the access token
-                    //def accessTokenValue = jsonResponse.AccessToken
-                    //echo " AccessToken:   ${accessTokenValue} "
 
                     // Check the HTTP response status
                     if (response.status == 200) {
@@ -56,11 +52,11 @@ pipeline {
                     )
 
                     // Capture the response status code and content
-                    //def Second Endpoint statusCode = response.getStatus()
-                    //def Second Endpoint responseBody = response.getContent()
+                    def Second Endpoint statusCode = response2.getStatus()
+                    def Second Endpoint responseBody = response2.getContent()
 
-                    //echo "Response Status Code Second EP: ${Second Endpoint responseBody}"
-                    //echo "Response Body of Second EP: ${Second Endpoint responseBody}"
+                    echo "Response Status Code Second EP: ${Second Endpoint responseBody}"
+                    echo "Response Body of Second EP: ${Second Endpoint responseBody}"
                     
                     } else {
                         error "API call failed with status.Response Status Code: ${statusCode}."
