@@ -1,86 +1,57 @@
 pipeline {
     agent any
     stages {
-        stage('Call First Endpoint') { // Give it a unique name
+        stage('Call Endpoint') {
             steps {
-                script {                    
-                    
+                script {
                     def response = httpRequest(
                         url: 'https://localhost:9164/management/login',
-                        httpMode: 'GET', // Use GET, POST, or other HTTP methods as needed
+                        httpMode: 'GET',
                         customHeaders:[[name:"Authorization",value:"Basic YWRtaW46YWRtaW4="]],
                         acceptType: 'APPLICATION_JSON',
-                        responseHandle: 'NONE', // Use 'NONE' to capture the raw response
-                        timeout: 60, // Set the timeout in seconds
-                        validResponseCodes: '200', // Define the expected response code(s)
-                        ignoreSslErrors: true,// Set to true if the endpoint uses self-signed SSL certificates
+                        responseHandle: 'NONE',
+                        timeout: 60,
+                        validResponseCodes: '200',
+                        ignoreSslErrors: true,
                     )
 
-                    // Capture the response status code and content
                     def statusCode = response.getStatus()
                     def responseBody = response.getContent()
 
                     echo "Response Status Code: ${statusCode}"
                     echo "Response Body: ${responseBody}"
 
-                    // You can now process or parse the response as needed
-                    // For example, parsing JSON:
-                    def jsonResponse = new groovy.json.JsonSlurper().parseText(responseBody)
-                    echo "Parsed JSON Response: ${jsonResponse}"
-                    echo "Parsed JSON Token"
+                    if (statusCode == 200) {
+                        def jsonResponse = new groovy.json.JsonSlurper().parseText(responseBody)
+                        def accessTokenValue = jsonResponse.AccessToken
+                        echo "AccessToken: ${accessTokenValue}"
 
-                    // Check the HTTP response status
-                    if (response.status == 200) {
-                        echo "API call was successful. ResponseBody: ${responseBody}"
-                    
-                   // Parse the JSON to extract the access token
-                    def accessTokenValue = jsonResponse.AccessToken
-                    echo " AccessToken:   ${accessTokenValue} "
-                    def inputdata= 'Bearer '+accessTokenValue
-                    echo "inputdata: ${inputdata}"
+                        def res = httpRequest(
+                            url: 'https://localhost:9164/management/applications',
+                            httpMode: 'GET',
+                            customHeaders:[[name:"Authorization",value:"Bearer ${accessTokenValue}"]],
+                            acceptType: 'APPLICATION_JSON',
+                            responseHandle: 'NONE',
+                            timeout: 60,
+                            validResponseCodes: '200',
+                            ignoreSslErrors: true,
+                        )
 
-                    } 
-                    else {
-                        error "API call to the first endpoint failed with status: ${statusCode}."
+                        // Capture the response status code and content for the second request
+                        def statusCodeofSeondEP = res.getStatus()
+                        def responseBodyofSeondEP = res.getContent()
+
+                        echo "Response Status Code Second EP: ${statusCodeofSeondEP}"
+                        echo "Response Body of Second EP: ${responseBodyofSeondEP}"
+
+                        if (statusCode2 != 200) {
+                            error "API call to the second endpoint failed with status: ${statusCodeofSeondEP}."
+                        }
+                    } else {
+                        echo "API call to the first endpoint failed with status: ${statusCode}."
                     }
                 }
             }
-    
-        stage('Call Second Endpoint') { // Give it a unique name
-            steps {
-                script {
-                    //calling second Endpoint
-                    echo "inputdata: ${inputdata}"
-
-                    def responseofSecondEP = httpRequest(
-                        url: 'https://localhost:9164/management/applications',
-                        httpMode: 'GET', // Use GET, POST, or other HTTP methods as needed
-                        customHeaders:[[name:"Authorization",value:"Bearer ${inputdata}"]],
-                        acceptType: 'APPLICATION_JSON',
-                        responseHandle: 'NONE', // Use 'NONE' to capture the raw response
-                        timeout: 60, // Set the timeout in seconds
-                        validResponseCodes: '200', // Define the expected response code(s)
-                        ignoreSslErrors: true,// Set to true if the endpoint uses self-signed SSL certificates
-                    )
-                    echo "Successfully called SecondEP"
-                    
-
-                    // Capture the response status code and content
-                    def statusCodeofSecondEP = responseofSecondEP.getStatus()
-                    def  responseBodyofSecondEP = responseofSecondEP.getContent()
-
-                    // Check the HTTP response status of the second request
-                        if (statusCodeofSecondEP == 200) {
-                            echo "API call to the second endpoint was successful. ResponseBody: ${responseBodyofSecondEP}"
-                        } else {
-                            error "API call to the second endpoint failed with status: ${statusCodeofSecondEP}."
-                        }
-                    
-                
-                }
-            }
-        }
-    
         }
     }
 }
