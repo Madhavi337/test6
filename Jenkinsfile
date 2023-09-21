@@ -41,12 +41,7 @@ pipeline {
                     // Check the HTTP response status
                     if (response.status == 200) {
                         echo "API call was successful. ResponseBody: ${responseBody}"
-                       // Parse the JSON to extract the access token
-                    def jsonSlurper = new groovy.json.JsonSlurper()
-                    def jsonMap = jsonSlurper.parseText(json)
-                    def accessToken = jsonMap.AccessToken
-
-                    echo "Access Token: ${accessToken}"
+                       
 
                     // Now, you can use 'accessToken' in subsequent steps
                         echo "Access token Successfull"
