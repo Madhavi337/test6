@@ -38,13 +38,25 @@ pipeline {
                    // Parse the JSON to extract the access token
                     def accessTokenValue = jsonResponse.AccessToken
                     echo " AccessToken:   ${accessTokenValue} "
-                    echo "Bearer ${accessTokenValue}"
+                    def inputdata= 'Bearer '+accessTokenValue
+                    echo "inputdata: ${inputdata}"
 
+                    } 
+                    else {
+                        error "API call to the first endpoint failed with status: ${statusCode}."
+                    }
+                }
+            }
+        stage('Call SecondEndpoint') {
+            steps {
+                script {
                     //calling second Endpoint
+                    echo "inputdata: ${inputdata}"
+
                     def responseofSecondEP = httpRequest(
                         url: 'https://localhost:9164/management/applications',
                         httpMode: 'GET', // Use GET, POST, or other HTTP methods as needed
-                        customHeaders:[[name:"Authorization",value:"Bearer ${accessTokenValue}"]],
+                        customHeaders:[[name:"Authorization",value:"Bearer ${inputdata}"]],
                         acceptType: 'APPLICATION_JSON',
                         responseHandle: 'NONE', // Use 'NONE' to capture the raw response
                         timeout: 60, // Set the timeout in seconds
@@ -58,17 +70,14 @@ pipeline {
                     def statusCodeofSecondEP = responseofSecondEP.getStatus()
                     def  responseBodyofSecondEP = responseofSecondEP.getContent()
 
-                    // Check the HTTP response status
-                    if (statusCodeofSecondEP == 200) {
-                        echo "API call was successful. ResponseBody: ${responseBodyofSecondEP}"
-                    }
-
-                    echo "Response Status Code Second EP: ${statusCodeofSecondEP}"
-                    echo "Response Body of Second EP: ${responseBodyofSecondEP}"
-
-                    }
-                    else {
-                        echo "API call failed with status.Response Status Code: ${statusCode}"
+                    // Check the HTTP response status of the second request
+                        if (statusCodeofSecondEP == 200) {
+                            echo "API call to the second endpoint was successful. ResponseBody: ${responseBodyofSecondEP}"
+                        } else {
+                            error "API call to the second endpoint failed with status: ${statusCodeofSecondEP}."
+                        }
+                    } else {
+                        error "API call to the first endpoint failed with status: ${statusCode}."
                     }
                     
                 
