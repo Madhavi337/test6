@@ -59,12 +59,8 @@ pipeline {
                     def statusCode = response.getStatus()
                     def responseBody = response.getContent()
 
-                    echo "Response Status Code: ${statusCode}"
-                    echo "Response Body of Send EP: ${responseBody}"
-
-
-                    // Now, you can use 'accessToken' in subsequent steps
-                        echo "Access token Successfull"
+                    echo "Response Status Code Second EP: ${statusCode}"
+                    echo "Response Body of Second EP: ${responseBody}"
                     
                     } else {
                         error "API call failed with status.Response Status Code: ${statusCode}."
