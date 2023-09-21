@@ -31,13 +31,6 @@ pipeline {
                     echo "Parsed JSON Response: ${jsonResponse}"
                     echo "Parsed JSON Token"
 
-    
-                }
-            }
-        }
-        stage('Call another Endpoint') {
-            steps {
-                script {  
                     // Check the HTTP response status
                     if (response.status == 200) {
                         echo "API call was successful. ResponseBody: ${responseBody}"
@@ -76,6 +69,5 @@ pipeline {
                 }
             }
         }
-    
     }
 }
