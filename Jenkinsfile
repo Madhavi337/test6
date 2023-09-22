@@ -15,15 +15,25 @@ pipeline {
                         ignoreSslErrors: true,
                     )
 
-                    // Process the response of the first endpoint
-                    // Extract and use the access token as needed
+                    // Capture the response status code and content
+                    def statusCode = response.getStatus()
+                    def responseBody = response.getContent()
+
+                    echo "Response Status Code: ${statusCode}"
+                    echo "Response Body: ${responseBody}"
+
+                    // You can now process or parse the response as needed
+                    // For example, parsing JSON:
+                    def jsonResponse = new groovy.json.JsonSlurper().parseText(responseBody)
+                    echo "Parsed JSON Response: ${jsonResponse}"
+                    
                 }
             }
         }
         stage('Call Second Endpoint') { // Give it a unique name
             steps {
                 script {
-                    def response = httpRequest(
+                    def res = httpRequest(
                         url: 'https://localhost:9164/management/login',
                         httpMode: 'GET',
                         customHeaders: [[name: "Authorization", value: "Basic YWRtaW46YWRtaW4="]],
@@ -34,8 +44,18 @@ pipeline {
                         ignoreSslErrors: true,
                     )
 
-                    // Process the response of the first endpoint
-                    // Extract and use the access token as needed
+                    // Capture the response status code and content
+                    def SecondstatusCode = res.getStatus()
+                    def SecondresponseBody = res.getContent()
+
+                    echo "Response Status Code: ${SecondstatusCode}"
+                    echo "Response Body: ${SecondresponseBody}"
+
+                    // You can now process or parse the response as needed
+                    // For example, parsing JSON:
+                    def jsonResponseSecond= new groovy.json.JsonSlurper().parseText(SecondresponseBody)
+                    echo "Parsed JSON Response: ${jsonResponseSecond}"
+                    
                 }
             }
         }
