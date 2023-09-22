@@ -26,6 +26,15 @@ pipeline {
                     // For example, parsing JSON:
                     def jsonResponse = new groovy.json.JsonSlurper().parseText(responseBody)
                     echo "Parsed JSON Response: ${jsonResponse}"
+
+
+                    if (statusCode == 200) {
+                        def jsonResponse = new groovy.json.JsonSlurper().parseText(responseBody)
+                        def accessTokenValue = jsonResponse.AccessToken
+                        echo "AccessToken: ${accessTokenValue}"
+                    else {
+                        error "API call failed with status.Response Status Code: ${statusCode}."
+                    }
                     
                 }
             }
