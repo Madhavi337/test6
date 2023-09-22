@@ -49,9 +49,9 @@ pipeline {
                 script {
                     echo "AccessTokenFirst: ${inputdata}"
                     def res = httpRequest(
-                        url: 'https://localhost:9164/management/login',
+                        url: 'https://localhost:9164/management/applications',
                         httpMode: 'GET',
-                        customHeaders: [[name: "Authorization", value: "Basic YWRtaW46YWRtaW4="]],
+                        customHeaders: [[name: "Authorization", value: "Bearer ${inputdata}"]],
                         acceptType: 'APPLICATION_JSON',
                         responseHandle: 'NONE',
                         timeout: 60,
