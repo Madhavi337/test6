@@ -33,9 +33,6 @@ pipeline {
                         def accessTokenValue = jsonResponse.AccessToken
                         echo "AccessToken: ${accessTokenValue}"
                     }
-                    else {
-                        error "API call failed with status.Response Status Code: ${statusCode}."
-                    }
                     
                 }
             }
