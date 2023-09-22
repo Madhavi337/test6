@@ -32,8 +32,8 @@ pipeline {
 
                         def jsonResponseFirst = new groovy.json.JsonSlurper().parseText(responseBody)
                         echo "Parsed JSON Response First: ${jsonResponseFirst}"
-                        def accessTokenValue = jsonResponseFirst.AccessToken
-                        echo "AccessToken: ${accessTokenValue}"
+                        def inputdata = jsonResponseFirst.AccessToken
+                        echo "AccessToken: ${inputdata}"
                     }
                     
                 }
@@ -42,6 +42,7 @@ pipeline {
         stage('Call Second Endpoint') { // Give it a unique name
             steps {
                 script {
+                    echo "AccessToken: ${inputdata}"
                     def res = httpRequest(
                         url: 'https://localhost:9164/management/login',
                         httpMode: 'GET',
