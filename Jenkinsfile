@@ -24,13 +24,15 @@ pipeline {
 
                     // You can now process or parse the response as needed
                     // For example, parsing JSON:
-                    def jsonResponse = new groovy.json.JsonSlurper().parseText(responseBody)
-                    echo "Parsed JSON Response: ${jsonResponse}"
 
 
                     if (statusCode == 200) {
-                        def jsonResponse = new groovy.json.JsonSlurper().parseText(responseBody)
-                        def accessTokenValue = jsonResponse.AccessToken
+                        // You can now process or parse the response as needed
+                    // For example, parsing JSON:
+
+                        def jsonResponseFirst = new groovy.json.JsonSlurper().parseText(responseBody)
+                        echo "Parsed JSON Response First: ${jsonResponseFirst}"
+                        def accessTokenValue = jsonResponseFirst.AccessToken
                         echo "AccessToken: ${accessTokenValue}"
                     }
                     
@@ -60,8 +62,8 @@ pipeline {
 
                     // You can now process or parse the response as needed
                     // For example, parsing JSON:
-                    def jsonResponseSecond= new groovy.json.JsonSlurper().parseText(SecondresponseBody)
-                    echo "Parsed JSON Response: ${jsonResponseSecond}"
+                    def jsonResponseSecond = new groovy.json.JsonSlurper().parseText(SecondresponseBody)
+                    echo "Parsed JSON Response Second: ${jsonResponseSecond}"
                     
                 }
             }
