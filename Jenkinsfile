@@ -1,7 +1,12 @@
 pipeline {
     agent any
+
+    environment {
+        inputdata = '' // Define inputdata at the pipeline level
+    }
+
     stages {
-        stage('Call First Endpoint') { // Give it a unique name
+        stage('Call First Endpoint') {
             steps {
                 script {
                     def response = httpRequest(
@@ -32,7 +37,7 @@ pipeline {
 
                         def jsonResponseFirst = new groovy.json.JsonSlurper().parseText(responseBody)
                         echo "Parsed JSON Response First: ${jsonResponseFirst}"
-                        def inputdata = jsonResponseFirst.AccessToken
+                        inputdata = jsonResponseFirst.AccessToken // Assign inputdata at the pipeline level
                         echo "AccessToken: ${inputdata}"
                     }
                     
