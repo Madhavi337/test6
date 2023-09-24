@@ -15,11 +15,11 @@ pipeline {
 
                     // Create destination folder if it doesn't exist
                     if (!fileExists(destinationFolder)) {
-                        bat "mkdir $destinationFolder"
+                        bat "mkdir $D:\\madhavi\\DestinationFolder"
                     }
 
                     // Copy files from source to destination
-                    bat "xcopy /s /e \"$sourceFolder\" \"$destinationFolder\""
+                    bat "xcopy /s /e \"$D:\\madhavi\\SourceFolder\" \"$D:\\madhavi\\DestinationFolder\""
                 }
             }
         }
