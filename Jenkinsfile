@@ -5,8 +5,8 @@ pipeline {
         stage('Copy Files') {
             steps {
                 script {
-                    def sourceFolder = '/path/to/source/folder'
-                    def destinationFolder = '/path/to/destination/folder'
+                    def sourceFolder = 'D:\madhavi\SourceFolder'
+                    def destinationFolder = 'D:\madhavi\DestinationFolder'
 
                     // Check if source folder exists
                     if (!fileExists(sourceFolder)) {
@@ -15,11 +15,11 @@ pipeline {
 
                     // Create destination folder if it doesn't exist
                     if (!fileExists(destinationFolder)) {
-                        sh "mkdir -p $destinationFolder"
+                        sh "mkdir -p $D:\madhavi\DestinationFolder"
                     }
 
                     // Copy files from source to destination
-                    sh "cp -r $sourceFolder/* $destinationFolder/"
+                    sh "cp -r $D:\madhavi\SourceFolder/* $D:\madhavi\DestinationFolder/"
                 }
             }
         }
