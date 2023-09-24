@@ -10,16 +10,16 @@ pipeline {
 
                     // Check if source folder exists
                     if (!fileExists(sourceFolder)) {
-                        error("Source folder does not exist: $D:\\madhavi\\SourceFolder")
+                        error("Source folder does not exist: $sourceFolder")
                     }
 
                     // Create destination folder if it doesn't exist
                     if (!fileExists(destinationFolder)) {
-                        bat "mkdir $D:\\madhavi\\DestinationFolder"
+                        bat "mkdir $destinationFolder"
                     }
 
                     // Copy files from source to destination
-                    bat "xcopy /s /e \"$D:\\madhavi\\SourceFolder\" \"$D:\\madhavi\\DestinationFolder\""
+                    bat "xcopy /s /e \"$sourceFolder\" \"$destinationFolder\""
                 }
             }
         }
