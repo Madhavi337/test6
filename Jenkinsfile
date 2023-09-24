@@ -14,14 +14,15 @@ pipeline {
                     def destinationPath = "${workspace}\\${destinationFolder}"
 
                     // Check if source folder exists
-                    if (!fileExists(path: sourcePath)) {
+                    if (!fileExists(file: sourcePath)) {
                         error("Source folder does not exist: $sourcePath")
                     }
 
                     // Create destination folder if it doesn't exist
-                    if (!fileExists(path: destinationPath)) {
+                    if (!fileExists(file: destinationPath)) {
                         bat "mkdir \"$destinationPath\""
                     }
+
 
                     // Copy files from source to destination
                     bat "xcopy /s /e \"$sourcePath\" \"$destinationPath\""
