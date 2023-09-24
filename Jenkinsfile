@@ -1,78 +1,32 @@
 pipeline {
     agent any
 
-    environment {
-        inputdata = '' // Define inputdata at the pipeline level
-    }
-
     stages {
-        stage('Call First Endpoint') {
+        stage('Copy Files') {
             steps {
                 script {
-                    def response = httpRequest(
-                        url: 'https://localhost:9164/management/login',
-                        httpMode: 'GET',
-                        customHeaders: [[name: "Authorization", value: "Basic YWRtaW46YWRtaW4="]],
-                        acceptType: 'APPLICATION_JSON',
-                        responseHandle: 'NONE',
-                        timeout: 60,
-                        validResponseCodes: '200',
-                        ignoreSslErrors: true,
-                    )
+                    def sourceFolder = '/path/to/source/folder'
+                    def destinationFolder = '/path/to/destination/folder'
 
-                    // Capture the response status code and content
-                    def statusCode = response.getStatus()
-                    def responseBody = response.getContent()
-
-                    echo "Response Status Code: ${statusCode}"
-                    echo "Response Body: ${responseBody}"
-
-                    // You can now process or parse the response as needed
-                    // For example, parsing JSON:
-
-
-                    if (statusCode == 200) {
-                        // You can now process or parse the response as needed
-                    // For example, parsing JSON:
-
-                        def jsonResponseFirst = new groovy.json.JsonSlurper().parseText(responseBody)
-                        echo "Parsed JSON Response First: ${jsonResponseFirst}"
-                        inputdata = jsonResponseFirst.AccessToken // Assign inputdata at the pipeline level
-                        echo "AccessTokenFirst: ${inputdata}"
+                    // Check if source folder exists
+                    if (!fileExists(sourceFolder)) {
+                        error("Source folder does not exist: $sourceFolder")
                     }
-                    
-                }
-            }
-        }
-        stage('Call Second Endpoint') { // Give it a unique name
-            steps {
-                script {
-                    echo "AccessTokenFirst: ${inputdata}"
-                    def res = httpRequest(
-                        url: 'https://localhost:9164/management/applications',
-                        httpMode: 'GET',
-                        customHeaders: [[name: "Authorization", value: "Bearer ${inputdata}"]],
-                        acceptType: 'APPLICATION_JSON',
-                        responseHandle: 'NONE',
-                        timeout: 60,
-                        validResponseCodes: '200',
-                        ignoreSslErrors: true,
-                    )
 
-                    // Capture the response status code and content
-                    def SecondstatusCode = res.getStatus()
-                    def SecondresponseBody = res.getContent()
+                    // Create destination folder if it doesn't exist
+                    if (!fileExists(destinationFolder)) {
+                        sh "mkdir -p $destinationFolder"
+                    }
 
-                    echo "Response Status Code: ${SecondstatusCode}"
-                    echo "Response Body: ${SecondresponseBody}"
-
-                    // You can now process or parse the response as needed
-                    // For example, parsing JSON:
-                    def jsonResponseSecond = new groovy.json.JsonSlurper().parseText(SecondresponseBody)
-                    echo "Parsed JSON Response Second: ${jsonResponseSecond}"
-                    
+                    // Copy files from source to destination
+                    sh "cp -r $sourceFolder/* $destinationFolder/"
                 }
             }
         }
     }
+}
+
+def fileExists(path) {
+    def file = new File(path)
+    return file.exists()
 }
