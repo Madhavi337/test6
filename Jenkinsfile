@@ -14,12 +14,12 @@ pipeline {
                     def destinationPath = "${workspace}\\${destinationFolder}"
 
                     // Check if source folder exists
-                    if (!fileExists(sourcePath)) {
+                    if (!fileExists(path: sourcePath)) {
                         error("Source folder does not exist: $sourcePath")
                     }
 
                     // Create destination folder if it doesn't exist
-                    if (!fileExists(destinationPath)) {
+                    if (!fileExists(path: destinationPath)) {
                         bat "mkdir \"$destinationPath\""
                     }
 
@@ -29,13 +29,4 @@ pipeline {
             }
         }
     }
-}
-
-def fileExists(path) {
-    return fileExists(path as String)
-}
-
-def fileExists(String path) {
-    def file = new File(path)
-    return file.exists()
 }
